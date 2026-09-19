@@ -13,7 +13,7 @@
 	<h6 style="text-align: right;">Демо-версия стилей.</h6>
 	</header>
 	<main class="blocks">
-	<div>
+	<div data-url="https://example.com">
 		<div class="bheader">Тема 1: Амюмя-мюмя-мюмяАмюмя- мюмя-мюмя Амюмя-мюмя-мюмяАмюмя-мюмя-мюмяАмюмя-мюмя-мюмяАмюмя-мюмя-мюмяАмюмя-мюмя-мюмяАмюмя-мюмя-мюмя</div>
 		<p>svo chmony<b>a zyuzya sigizmund cipizdrik swaga svo chmonya</b> zyuzya sigizmund cipizdrik swaga svo chmonya zyuzya sigizmund cipizdrik swaga svo chmonya zyuzya sigizmund cipizdrik swaga svo chmonya zyuzya sigizmund cipizdrik swaga svo chmonya zyuzya sigizmund cipizdrik swaga svo chmonya zyuzya sigizmund cipizdrik swaga svo chmonya zyuzya sigizmund cipizdrik swaga </p>
 	</div>
@@ -31,4 +31,15 @@
 	</div>
 	</main>
 </body>
+<script>
+document.querySelectorAll(".blocks > *").forEach(block=>{block.addEventListener("click", function() {
+	const targetUrl = this.dataset.url;
+	if (targetUrl) {
+		window.location.href = targetUrl;
+	}
+	else {alert("Ошибка 003: Кнопка не содержит ссылку.");}
+});
+});
+</script>
+
 </html>
