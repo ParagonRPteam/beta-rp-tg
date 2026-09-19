@@ -1,83 +1,160 @@
+/*Оглавление:
+	1. Шрифты:	1.1 p052b	1.2 hackb
+	2. Общие и :root значения
+	3. Основа вёрстки
+	4. Блоки Header, Main, Footer. (определяющие тип страницы)
+	5. Стили базовых элементов (h1-6, p, pre, and etc.)	
+	6. Стили элементов, уникальных для страниц.
+	7. "Сакральные стили"
+	8. Стили классов (.hack / .pb для шрифтов and etc.)*/
+	
+/* 1. Шрифты */
+@font-face {	font-family: "p052b";	src: url("assets/p052b.otf"); }
+@font-face {	font-family: "hackb";	src: url("assets/hackb.ttf"); }
 
-@font-face {
-	font-family: "p052b";
-	src: url("assets/p052b.otf");	
+/* 2. Общие и :root значения */
+/* Значения из этого подпункта МОГУТ быть написаны в формате исключений, но лишь их, другие субселекторы крайне осуждаемы.*/
+:root {
+	--fg: rgb(210,210,255);
+	--bg: rgb(0,0,25);
+	--fg-accent: rgb(240,240,255);
+	--bg-accent: rgb(0,0,80);
+	--bg-semitransparent: rgba(0,0,80,0.05);
+
+	--least: -32;
+	--most: 32;
+	--bordure: 2px;
+
+	background: url(assets/bgcs1.png) no-repeat;
+	background-position: right;
+	background-size: auto 100%;
+}
+::selection {
+	color: var(--accent);
+	background-color: var(--fg);
 }
 * {
-	transition: all 1s;
-}
-html {	
-		background-color: black;
-}
-main > * {
-	font-size: 20px;
-}
-b {
-	color: rgba(200, 220, 255, 0.9);
-}
-body {
-	width: 100vw;
-	height: 99vh;
+	transition: all 0.5s;
 	margin: 0;
 	padding: 0;
-	background: url(assets/bgcs1.png) no-repeat, linear-gradient(90deg, rgb(0, 2, 5) 0.1%, black );
-	background-size: auto 100vh;
-	background-position: right;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	overflow: scroll;
+	font-family: hackb;
+	color: var(--fg);
+	box-sizing: border-box;
 }
- body > * {
- 	margin: 0;
- 	padding: 0;
-	font-family: p052b;
-	color: white;
-	text-align: center;
-	cursor: default;
- }
+/* 3. Основа вёрстки */
+body {
+	width: 100vw;
+	max-width: 100vh;
+	min-height: 100vh;
+	margin-inline: auto;
+	transition: none;
+	background-color: var(--bg-semitransparent);
+	flex-direction: column;
+}
+body:not(:has(footer)) {
+	display: flex;	
+}
+/* 4. Блоки Body, Header, Main, Footer. (определяющие тип страницы) */
+body {
+	background-color: var(--bg-semitransparent);
+	border: 4px solid var(--fg);
+}
+header {
+	order: var(--least);
+	background-color: var(--bg-block);
+	width: 100%;
+	min-height: 6em;
+	height: fit-content;
+	border-bottom: var(--bordure) solid var(--fg);
+	flex-grow: 0;
+	padding: 0.5em;
+}
+main {
+	flex-grow: 1;
+	display: flex;
+	flex-flow: column nowrap;
+	background-color: var(--bg-semitransparent);
+	gap: 0.5em;
+	padding: 0.5em;
+}
+main {
+	self-align: end;
+}
+/* 5. Стили базовых элементов (h1-6, p, pre, and etc.) */	
 h1 {
+	font-family: p052b;
 	font-size: 4em;
-	margin: 0;
 }
 h2 {
-	margin: 0;
-	font-size: 2.5em;
-	color: rgba(200, 220, 255, 0.3);
+	font-family: p052b;
+	font-size: 3em;
 }
 h3 {
-		color: rgba(200, 220, 255, 0.2);
+	font-family: p052b;
+	font-size: 2.5em;
 }
 h4 {
-		font-size: 1.5em;
-		color: rgba(200, 220, 255, 0.9);
+	font-family: hackb;
+	font-size: 2.5em;
 }
-#necessary-container > *{
-		text-align: center;
-		cursor: pointer;
+h5 {
+	font-family: hackb;
+	font-size: 1.5em;
 }
-#necessary-container > div:hover:not(#nc2) {
-		transform: scale(1.1);
-		text-shadow: 0 0 5px rgba(200, 220, 255, 0.8);
+h6 {
+	font-family: hackb;
+	font-size: 1em;
+	color: var(--accent);
 }
-#necessary-container:hover {
-	transform: scale(1.05)
+p {
+	font-size: 1em;
+	color: var(--fg);
 }
-@media (orientation: landscape) {
-	#necessary-container > *{
-	width: 25vw;
-	}
-	#nc2 {
-	transform: scale(1.3) translate(0, 20px);
-	}
-}
-@media (orientation: portrait) {
-	#necessary-container {
-		flex-direction: column;
-	}
+b {
+	font-size: 1.1em;
+	color: var(--accent);
 }
 
+/* 6. Стили элементов, уникальных для страниц. */
+ main.blocks > * {
+ 	background-color: var(--bg-block);
+ 	border: 2px solid var(--fg);
+ 	margin-inline: auto;
+ 	min-height: 3em;
+ 	width: 100%; 
+	box-shadow: 4px 4px var(--bg-semitransparent);
+ }
+main.blocks > *:hover {
+	background-color: var(--bg-accent);
+}
+main.blocks > * > p {
+	padding-inline: 1em;
+}
+main.blocks > *:hover > .bheader {
+	color: var(--bg-accent);
+}
+.bheader {
+	background-color: var(--fg);
+	color: var(--bg);
+	max-height: 1.5em;
+	font-size: 1.5em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+/* 7. "Сакральные стили" */
 a {
 	text-decoration: none;
-	color: rgba(200, 220, 255, 0.2);
+	color: var(--accent);
+}
+ul {
+	list-style-type: none;
+}
+
+/*8. Стили классов (.hack / .pb для шрифтов and etc.) */
+.hack {
+	font-family: hackb;
+}
+.pb {
+	font-family: p052b;
 }
