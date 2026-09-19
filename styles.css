@@ -77,9 +77,6 @@ main {
 	gap: 0.5em;
 	padding: 0.5em;
 }
-main {
-	self-align: end;
-}
 /* 5. Стили базовых элементов (h1-6, p, pre, and etc.) */	
 h1 {
 	font-family: p052b;
@@ -112,9 +109,12 @@ p {
 }
 b {
 	font-size: 1.1em;
-	color: var(--accent);
+	color: var(--fg-accent);
 }
-
+i {
+	font-size: 1.1em;
+	color: var(--fg-accent);
+}
 /* 6. Стили элементов, уникальных для страниц. */
  main.blocks > * {
  	background-color: var(--bg-block);
@@ -149,7 +149,7 @@ main.blocks > *:hover > .bheader {
 /* 7. "Сакральные стили" */
 a {
 	text-decoration: none;
-	color: var(--accent);
+	color: var(--fg-accent);
 }
 ul {
 	list-style-type: none;
