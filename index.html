@@ -48,6 +48,7 @@
 document.querySelectorAll(".blocks > *:not(.nolink)").forEach(block=>{block.addEventListener("click", function() {
 	const targetUrl = this.dataset.url;
 	if (targetUrl) {
+		wait(1000);
 		window.location.href = targetUrl;
 	}
 	else {alert("Ошибка 003: Кнопка не содержит ссылку.");}
