@@ -45,7 +45,7 @@
 </main>
 </body>
 <script>
-document.querySelectorAll(".blocks > *").forEach(block=>{block.addEventListener("click", function() {
+document.querySelectorAll(".blocks > *not(.nolink)").forEach(block=>{block.addEventListener("click", function() {
 	const targetUrl = this.dataset.url;
 	if (targetUrl) {
 		window.location.href = targetUrl;
