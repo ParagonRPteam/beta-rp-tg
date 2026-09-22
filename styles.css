@@ -16,9 +16,11 @@
 /* Значения из этого подпункта МОГУТ быть написаны в формате исключений, но лишь их, другие субселекторы крайне осуждаемы.*/
 :root {
 	--fg: rgb(210,210,255);
+	--fg-dimm: rgb(140,140,185);
 	--bg: rgb(0,0,25);
 	--fg-accent: rgb(240,240,255);
-	--bg-accent: rgb(0,0,80);
+	--fg-super-accent: rgb(200,200,255);
+	--bg-accent: rgb(0,0,60);
 	--bg-semitransparent: rgba(0,0,80,0.05);
 
 	--least: -32;
@@ -28,9 +30,10 @@
 	background: url(assets/bgcs1.png) no-repeat;
 	background-position: right;
 	background-size: auto 100%;
+	height: 100vh;
 }
 ::selection {
-	color: var(--accent);
+	color: var(--bg-accent);
 	background-color: var(--fg);
 }
 * {
@@ -50,6 +53,7 @@ body {
 	transition: none;
 	background-color: var(--bg-semitransparent);
 	flex-direction: column;
+	overflow: scroll;
 }
 body:not(:has(footer)) {
 	display: flex;	
@@ -100,20 +104,26 @@ h5 {
 }
 h6 {
 	font-family: hackb;
+	padding-left: 3em;
 	font-size: 1em;
-	color: var(--accent);
+	color: var(--fg-accent);
 }
 p {
 	font-size: 1em;
 	color: var(--fg);
+	padding-inline: 1em;
 }
 b {
 	font-size: 1.1em;
 	color: var(--fg-accent);
 }
 i {
-	font-size: 1.1em;
-	color: var(--fg-accent);
+	font-size: 1.05em;
+}
+a {
+	color: var(--bg-accent);
+	background-color: var(--fg);
+	padding-inline: 0.2em; 
 }
 /* 6. Стили элементов, уникальных для страниц. */
  main.blocks > * {
@@ -123,16 +133,17 @@ i {
  	min-height: 3em;
  	width: 100%; 
 	box-shadow: 4px 4px var(--bg-semitransparent);
-	border-radius: 0 0 10px 10px;
+ }
+ main.blocks > *.ankreq::after {
+	margin-left: 1.5em;
+ 	content: "Прочитайте перед заполнением анкеты!";
+ 	color: var(--fg-super-accent);
+ 	text-align: center;
  }
 main.blocks > *:hover {
 	background-color: var(--bg-accent);
-	border-radius: 0 0 20px 20px;
 	box-shadow: 0 0 40px var(--bg);
 	z-index: var(--most);
-}
-main.blocks > * > p {
-	padding-inline: 1em;
 }
 main.blocks > *:hover > .bheader {
 	color: var(--bg-accent);
@@ -140,16 +151,19 @@ main.blocks > *:hover > .bheader {
 .bheader {
 	background-color: var(--fg);
 	color: var(--bg);
-	max-height: 1.5em;
+	height: 1.5em;
 	font-size: 1.5em;
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	padding-inline: 0.5em;
+}
+main.blocks > * > p {
+	margin: 0.5em;
 }
 /* 7. "Сакральные стили" */
 a {
 	text-decoration: none;
-	color: var(--fg-accent);
 }
 ul {
 	list-style-type: none;
